@@ -12,7 +12,7 @@ out=`cat /tmp/monitor | grep tx | grep -v kbit | awk '{print $2}' | cut  -d . -f
 outx=$(($out + $i))
 
 echo "$inx" 
-echo "$outrx"
+echo "$outx"
  
 ##### Second Test after 2 minutes
 sleep 30
@@ -23,7 +23,7 @@ out2=`cat /tmp/monitor2 | grep tx | grep -v kbit | awk '{print $2}' | cut  -d . 
 outx2=$(($out2 + $i))
 
 echo "$inx2" 
-echo "$outrx2"
+echo "$ourx2"
 
 #### Third Test after 4 minutes
 sleep 30
@@ -34,6 +34,6 @@ out3=`cat /tmp/monitor3 | grep tx | grep -v kbit | awk '{print $2}' | cut  -d . 
 outx3=$(($out3 + $i))
 
 echo "$inx3"
-echo "$outrx3"
+echo "$outx3"
 
 done
