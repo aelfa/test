@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while true ; do
+while true; do
 #Monitory Bandwidth Developed by Adminlogs.info
 #Tested and verified with CentOS and RedHat 5
 hostname=`hostname`
