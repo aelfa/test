@@ -6,9 +6,9 @@ hostname=`hostname`
 vnstat -tr > /tmp/monitor
 i=0
 in=`cat /tmp/monitor | grep rx | grep -v kbit | awk '{print $2}' | cut  -d . -f1`
-inx=$(($in + $i))
+inx1=$(($in + $i))
 out=`cat /tmp/monitor | grep tx | grep -v kbit | awk '{print $2}' | cut  -d . -f1`
-outx=$(($out + $i))
+outx1=$(($out + $i))
 
 echo "INCOMING : ${inx1}" 
 echo "OUTGOING : ${outx1}"
