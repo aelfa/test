@@ -8,8 +8,8 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'statping'
-        intport: '8366'
+        pgrole: 'status'
+        intport: '8080'
         extport: '8366'
         image: 'eafxx/statping'
 
