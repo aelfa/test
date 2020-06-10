@@ -9,7 +9,7 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'status'
-        intport: '8080'
+        intport: '8366'
         extport: '8366'
         image: 'eafxx/statping'
 
@@ -38,7 +38,7 @@
     - name: 'Setting {{pgrole}} Volumes'
       set_fact:
         pg_volumes:
-          - '/opt/appdata/{{pgrole}}/config:/app'
+          - '/opt/appdata/{{pgrole}}/config:/app:rw'
           - '/etc/localtime:/etc/localtime:ro'
           - '/var/run/docker.sock:/var/run/docker.sock'
 
@@ -48,7 +48,7 @@
           PUID: '1000'
           PGID: '1000'
           SKIPUPDATE: 'no'
-          VERBOSE: 'no'
+          VERBOSE: '1'
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
