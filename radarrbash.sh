@@ -16,10 +16,11 @@ echo $apiKeycut
 downloadUrl=folder
 date=$(date -u +"%Y-%m-%d %H:%M:%SZ")
 
- for radarradd in `cat /tmp/radarradd`; do
+ for radarradd in `cat /tmp/radarradd` ; do
      /usr/bin/curl -i -H "Accept: application/json" -H "Content-Type: application/json" -H "X-Api-Key: ${apiKeycut}" -X POST -d '{"title":"'"$radarradd"'","downloadUrl":"'"$downloadUrl"'","downloadProtocol":"torrent","publishDate":"'"$date"'"}'' http://radarr:7878/api/release/push
     echo "Movie Add : ${radarradd} successfull"
  done
+
 }
 
 list_all_folders
