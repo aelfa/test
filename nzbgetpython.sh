@@ -18,13 +18,16 @@ sudo wget -N https://raw.githubusercontent.com/h1f0x/nzbget-python3-scripts/mast
 }
 
 function script_install() {
-nzbgetscriptfolder="/opt/appdata/nzbget/scripts"
+folder="/opt/appdata/nzbget/scripts/"
 
-if [[ -d "$nzbgetsciptfolder" ]]; then
-#rm -rf "$nzbgetscriptfolder"
-cd "$nzbgetscriptfolder" 
+if [[ -d "$folder" ]]; then
+sudo rm -rf "$folder
+sudo mkdir -p "$folder"
+cd "$folder" 
 scripts_python3
 install_scripts
+sudo chown -cR 1000:1000 "$folder"
+sudo chmod -cR 775 "$folder"
 fi
 }
 
