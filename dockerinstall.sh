@@ -3,17 +3,17 @@
 if ! docker --version; then
     install_docker
 else 
-    restall 
+    reinstall_docker 
 fi
 
-function reinstall() {
+function reinstall_docker() {
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━
 [Y] UPDATE to lateste version
 [Z] Exit
 ━━━━━━━━━━━━━━━━━━
 EOF
-  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Y or Z | Press [ENTER]: ' typed </dev/tty
 
   case $typed in
   Y) install_docker ;;
