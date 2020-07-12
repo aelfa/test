@@ -30,10 +30,11 @@ sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
+    gnupg2 \
     software-properties-common
 
 curl https://raw.githubusercontent.com/docker/docker-install/master/install.sh | sudo bash
-
+sudo systemctl enable --now docker
 sudo systemctl status docker | awk '$1 == "Active:" {print $2,$3}'
 
 # add current user to docker group so there is no need to use sudo when running docker
