@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if ! docker --version; then
-    echo "ERROR: Did Docker get installed?"
-    command
+    install_docker
 else 
     restall 
 fi
@@ -17,15 +16,15 @@ EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
 
   case $typed in
-  Y) command;;
-  y) command ;;
+  Y) install_docker ;;
+  y) install_docker ;;
   z) clear && exit ;;
   Z) clear && exit ;;
   *) badinput ;;
   esac
 }
 
-function command() {
+function install_docker() {
 sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
