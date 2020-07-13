@@ -29,28 +29,27 @@ AC=find
 NM=-name
 MD=-maxdepth
 EP=-empty
-MINAGE='-type f'
 
-  $AC $DIR $MD 8 $MINAGE $NM "*.sfv" -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*.txt" -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*.xml" -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Sample" -exec rm -rf {} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Proof" -type d -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Screens" -type d -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Cover" -type d -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Subs" -type d -exec rm -rf \{} \; 
-  $AC $DIR $MD 8 $MINAGE $NM "*jpg" -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*jpeg" -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*-sample.mkv" -exec rm -f \{\} \;  
-  $AC $DIR $MD 8 $MINAGE $NM "*sample" -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Screens*" -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Covers*" -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*.nfo" -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Sample*" -exec rm -f \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*sample*" -exec rm -f \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*samp*" -exec rm -f \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*.png" -exec rm -f \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*.nfo" -type f -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "*.sfv" -type f -exec rm -f \{\} \;
+  $AC $DIR $MD 8 $NM "*.txt" -tupe f -exec rm -f \{\} \;
+  $AC $DIR $MD 8 $NM "*.xml" -type f -exec rm -f \{\} \;
+  $AC $DIR $MD 8 $NM "Sample" -type d -exec rm -rf {} \;
+  $AC $DIR $MD 8 $NM "Proof" -type d -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Screens" -type d -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Cover" -type d -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Subs" -type d -exec rm -rf \{} \; 
+  $AC $DIR $MD 8 $NM "*jpg" -type f -exec rm -f \{\} \;
+  $AC $DIR $MD 8 $NM "*jpeg" -type f -exec rm -f \{\} \;
+  $AC $DIR $MD 8 $NM "*-sample.mkv" -typr f -exec rm -f \{\} \;  
+  $AC $DIR $MD 8 $NM "*sample" -type f -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Screens*" -tupe d -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Covers*" -type f -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "*.nfo" -type f -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Sample*" -type d -exec rm -f \{} \;
+  $AC $DIR $MD 8 $NM "*sample*" -type f -exec rm -f \{} \;
+  $AC $DIR $MD 8 $NM "*samp*" -type f -exec rm -f \{} \;
+  $AC $DIR $MD 8 $NM "*.png" -type f -exec rm -f \{} \;
+  $AC $DIR $MD 8 $NM "*.nfo" -type f -exec rm -rf \{} \;
   $AC $DIR -mindepth 2 -type d $EP -exec rmdir \{} \;
 
 ############################################################################
