@@ -31,7 +31,7 @@ MD=-maxdepth
 EP=-empty
 
   $AC $DIR $MD 8 $NM "*.sfv" -type f -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $NM "*.txt" -tupe f -exec rm -f \{\} \;
+  $AC $DIR $MD 8 $NM "*.txt" -type f -exec rm -f \{\} \;
   $AC $DIR $MD 8 $NM "*.xml" -type f -exec rm -f \{\} \;
   $AC $DIR $MD 8 $NM "Sample" -type d -exec rm -rf {} \;
   $AC $DIR $MD 8 $NM "Proof" -type d -exec rm -rf \{} \;
