@@ -29,7 +29,7 @@ AC=find
 NM=-name
 MD=-maxdepth
 EP=-empty
-MINAGE='-type f -amin +600'
+MINAGE='-type f'
 
   $AC $DIR $MD 8 $MINAGE $NM "*.sfv" -exec rm -f \{\} \;
   $AC $DIR $MD 8 $MINAGE $NM "*.txt" -exec rm -f \{\} \;
@@ -38,9 +38,11 @@ MINAGE='-type f -amin +600'
   $AC $DIR $MD 8 $MINAGE $NM "Proof" -type d -exec rm -rf \{} \;
   $AC $DIR $MD 8 $MINAGE $NM "Screens" -type d -exec rm -rf \{} \;
   $AC $DIR $MD 8 $MINAGE $NM "Cover" -type d -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $MINAGE $NM "Subs" -type d -exec rm -rf \{} \;  $AC $DIR $MD 8 $MINAGE $NM "*jpg" -exec rm -f \{\} \;
+  $AC $DIR $MD 8 $MINAGE $NM "Subs" -type d -exec rm -rf \{} \; 
+  $AC $DIR $MD 8 $MINAGE $NM "*jpg" -exec rm -f \{\} \;
   $AC $DIR $MD 8 $MINAGE $NM "*jpeg" -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $MINAGE $NM "*-sample.mkv" -exec rm -f \{\} \;  $AC $DIR $MD 8 $MINAGE $NM "*sample" -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $MINAGE $NM "*-sample.mkv" -exec rm -f \{\} \;  
+  $AC $DIR $MD 8 $MINAGE $NM "*sample" -exec rm -rf \{} \;
   $AC $DIR $MD 8 $MINAGE $NM "Screens*" -exec rm -rf \{} \;
   $AC $DIR $MD 8 $MINAGE $NM "Covers*" -exec rm -rf \{} \;
   $AC $DIR $MD 8 $MINAGE $NM "*.nfo" -exec rm -rf \{} \;
