@@ -40,10 +40,10 @@ EP=-empty
   $AC $DIR $MD 8 $NM "Subs" -type d -exec rm -rf \{} \; 
   $AC $DIR $MD 8 $NM "*jpg" -type f -exec rm -f \{\} \;
   $AC $DIR $MD 8 $NM "*jpeg" -type f -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $NM "*-sample.mkv" -typr f -exec rm -f \{\} \;  
+  $AC $DIR $MD 8 $NM "*-sample.mkv" -type f -exec rm -f \{\} \;  
   $AC $DIR $MD 8 $NM "*sample" -type f -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $NM "Screens*" -tupe d -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $NM "Covers*" -type f -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Screens*" -type d -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "Covers*" -type d -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "*.nfo" -type f -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "Sample*" -type d -exec rm -f \{} \;
   $AC $DIR $MD 8 $NM "*sample*" -type f -exec rm -f \{} \;
