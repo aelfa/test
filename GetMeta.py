@@ -5,7 +5,7 @@
 #
 # $File: MetaPW.py $
 #
-# Check first line "#!/usr/local/zy-pkgs/bin/python2.6" and maybe adjust it!
+# Check first line "#!/usr/bin/python3" and maybe adjust it!
 #
 # v1.0:
 # - inital version
