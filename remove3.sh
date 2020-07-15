@@ -3,13 +3,37 @@ if pidof -o %PPID -x "$0"; then
     exit 1
 fi
 
+TESTPART="$@"
+##########
+if [ ${TESTPART} == "testrun" ]; then
+    DRY-RUN="--dry-run"
+else
+    DRY-RUN=""
+fi
+##########
+if [ ${TESTPART} == "help" ]; then
+clear 
+ printf '
+┌──────────────────────────┐
+│-== Remove Garbage files via rclone ==-  │
+│_________________________________________│
+│ commands                                │
+│ print help part                help     │
+│ dry-run mode                   testrun  │ 
+└──────────────────────────┘
+'
+exit 1
+fi
+
+
+#########################
 FIND=$(which rclone)
 FIND_ADD_NAME='--include'
 FIND_DEL_NAME='delete'
 FIND_DEL_EMPTY='--rmdirs'
 CONFIG='--config'
 CONFIG_FILE='/opt/appdata/plexguide/rclone.conf'
-
+#########################
 UNWANTED_FILES=(
     '*.nfo'
     '*.jpeg'
@@ -66,27 +90,28 @@ UNWANTED_FILES=(
     '*.png*'
 )
 
-condition="'{FIND_ADD_NAME}''${UNWANTED_FILES[0]}'"
+#Folder Setting
+condition="--include=${UNWANTED_FILES[0]}"
 for ((i = 1; i < ${#UNWANTED_FILES[@]}; i++))
 do
-    condition="${condition} '${FIND_ADD_NAME}''${UNWANTED_FILES[i]}'"
+    condition="${condition} ${FIND_ADD_NAME}=${UNWANTED_FILES[i]}"
 done
 
+if grep -q gcrypt ${CONFIG_FILE}; then
+   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} gcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
+fi
 
-#if grep -q gcrypt ${CONFIG_FILE}; then
-#   ${FIND} ${FIND_DEL_NAME} gcrypt: ${condition} ${CONFIG}=${CONFIG_FILE}
-#fi
+if grep -q gdrive ${CONFIG_FILE}; then
+   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} gdrive: "${condition}" ${CONFIG}=${CONFIG_FILE}
+fi
 
-#if grep -q gdrive ${CONFIG_FILE}; then
-#   ${FIND} ${FIND_DEL_NAME} gdrive: ${condition} ${CONFIG}=${CONFIG_FILE}
-#fi
+if grep -q tcrypt ${CONFIG_FILE}; then
+   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} tcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
+fi
 
-#if grep -q tcrypt ${CONFIG_FILE}; then
-#   ${FIND} ${FIND_DEL_NAME} tcrypt: ${condition} ${CONFIG}=${CONFIG_FILE}
-#fi
+if grep -q tdrive ${CONFIG_FILE}; then
+   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} tdrive: "${condition}" ${CONFIG}=${CONFIG_FILE}
+fi
 
-#if grep -q tdrive ${CONFIG_FILE}; then
-#   ${FIND} ${FIND_DEL_NAME} tdrive: ${condition} ${CONFIG}=${CONFIG_FILE}
-#fi
-
-${FIND} --dry-run ${FIND_DEL_NAME} gcrypt: ${condition} ${CONFIG}=${CONFIG_FILE}
+##${FIND} --dry-run ${FIND_DEL_NAME} gcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
+exit 1
