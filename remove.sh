@@ -22,7 +22,7 @@ function run_command_4() {
 }
 ##############################################################################
 
-# unpack the folder
+## functions part
 function run_first() {
 
 AC=find
@@ -38,17 +38,17 @@ EP=-empty
   $AC $DIR $MD 8 $NM "Screens" -type d -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "Cover" -type d -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "Subs" -type d -exec rm -rf \{} \; 
-  $AC $DIR $MD 8 $NM "*jpg" -type f -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $NM "*jpeg" -type f -exec rm -f \{\} \;
-  $AC $DIR $MD 8 $NM "*-sample.mkv" -type f -exec rm -f \{\} \;  
+  $AC $DIR $MD 8 $NM "*jpg" -type f -exec rm -rf \{\} \;
+  $AC $DIR $MD 8 $NM "*jpeg" -type f -exec rm -rf \{\} \;
+  $AC $DIR $MD 8 $NM "*-sample.mkv" -type f -exec rm -rf \{\} \;  
   $AC $DIR $MD 8 $NM "*sample" -type f -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "Screens*" -type d -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "Covers*" -type d -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "*.nfo" -type f -exec rm -rf \{} \;
-  $AC $DIR $MD 8 $NM "Sample*" -type d -exec rm -f \{} \;
-  $AC $DIR $MD 8 $NM "*sample*" -type f -exec rm -f \{} \;
-  $AC $DIR $MD 8 $NM "*samp*" -type f -exec rm -f \{} \;
-  $AC $DIR $MD 8 $NM "*.png" -type f -exec rm -f \{} \;
+  $AC $DIR $MD 8 $NM "Sample*" -type d -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "*sample*" -type f -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "*samp*" -type f -exec rm -rf \{} \;
+  $AC $DIR $MD 8 $NM "*.png" -type f -exec rm -rf \{} \;
   $AC $DIR $MD 8 $NM "*.nfo" -type f -exec rm -rf \{} \;
   $AC $DIR -mindepth 2 -type d $EP -exec rmdir \{} \;
 
