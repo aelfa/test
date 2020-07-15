@@ -1,9 +1,24 @@
 #!/bin/bash
+if pidof -o %PPID -x "$0"; then
+    exit 1
+fi
+
+# basic settings
+TARGET_FOLDER="/mnt/{gdrive,tdrive,gcrypt,tcrypt}/"
+# find files in this folders
+
+# advanced settings
+FIND=$(which find)
+FIND_BASE_CONDITION_UNWANTED='-type f'
+FIND_ADD_NAME='-o -iname'
+FIND_DEL_NAME='! -iname'
+FIND_ACTION='-not -path "*encrypt*" -delete > /dev/null 2>&1'
 
 UNWANTED_FILES=(
     '*.nfo'
     '*.jpeg'
     '*.jpg'
+    '*.gif'
     '*.rar'
     '*sample*'
     '*.1'
@@ -27,8 +42,16 @@ UNWANTED_FILES=(
     '*.htm'
     '*.html'
     '*.sfv'
+    '*sample.*'
+    '*.sh'
     '*.pdf'
+    '*.doc'
+    '*.docx'
+    '*.xls'
+    '*.xlsx'
     '*.xml'
+    '*.html'
+    '*.htm'
     '*.exe'
     '*.lsn'
     '*.nzb'
@@ -44,28 +67,18 @@ UNWANTED_FILES=(
     '*.idx'
     '*.rar'
     '*sample*'
-    )
-# advanced settings
-FIND=$(which find)
-FIND_BASE_CONDITION='-type f'
-FIND_ADD_NAME='-o -name'
-FIND_ACTION='-not -path "*encrypt*" -delete > /dev/null 2>&1'
-
+    '*.png*'
+)
 #Folder Setting
-TARGET_FOLDER=$1"/mnt/{gdrive,tdrive,gcrypt,tcrypt}/"
-
-if [ ! -d "${TARGET_FOLDER}" ]; then echo 'Target directory does not exist - skipping '; fi
-    condition="-name '${UNWANTED_FILES[0]}'"
+condition="-iname '${UNWANTED_FILES[0]}'"
 for ((i = 1; i < ${#UNWANTED_FILES[@]}; i++))
 do
-  condition="${condition} ${FIND_ADD_NAME} '${UNWANTED_FILES[i]}'"
+    condition="${condition} ${FIND_ADD_NAME} '${UNWANTED_FILES[i]}'"
 done
-
-command="${FIND} '${TARGET_FOLDER}' -mindepth 2 ${FIND_BASE_CONDITION} \( ${condition} \) ${FIND_ACTION}"
+command="${FIND} ${TARGET_FOLDER} -mindepth 1 ${FIND_BASE_CONDITION_UNWANTED} \( ${condition} \) ${FIND_ACTION}"
 echo "Executing ${command}"
 eval "${command}"
 
-command="${FIND} ${TARGET_FOLDER} -mindepth 2 -type d -empty ${FIND_ACTION}"
-#echo "Executing ${command}"
+command="${FIND} ${TARGET_FOLDER} -mindepth 1 -type d -empty ${FIND_ACTION}"
+echo "Executing ${command}"
 eval "${command}"
-exit 0
