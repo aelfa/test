@@ -7,7 +7,7 @@ FIND=$(which rclone)
 FIND_ADD_NAME='--include'
 FIND_DEL_NAME='delete'
 FIND_DEL_EMPTY='--rmdirs'
-CONFIG='--config=${CONFIG_FILE}'
+CONFIG='--config'
 CONFIG_FILE='/opt/appdata/plexguide/rclone.conf'
 
 UNWANTED_FILES='
@@ -67,19 +67,19 @@ What.rar
 '
 
 #if grep -q gcrypt ${CONFIG_FILE}; then
-#   ${FIND} gcrypt:/ ${FIND_DEL_NAME} ${FIND_ADD_NAME} ${CONFIG}
+#   ${FIND} ${FIND_DEL_NAME} gcrypt:/ ${FIND_ADD_NAME}=${UNWANTED_FILES} ${CONFIG}=${CONFIG_FILE}
 #fi
 
 #if grep -q gdrive ${CONFIG_FILE}; then
-#   ${FIND} gdrive:/ ${FIND_DEL_NAME} ${FIND_ADD_NAME} ${CONFIG}
-#fi
-
-#if grep -q tdrive ${CONFIG_FILE}; then
-#   ${FIND} tdrive:/ ${FIND_DEL_NAME} ${FIND_ADD_NAME} ${CONFIG}
+#   ${FIND} ${FIND_DEL_NAME} gdrive:/ ${FIND_ADD_NAME}=${UNWANTED_FILES} ${CONFIG}=${CONFIG_FILE}
 #fi
 
 #if grep -q tcrypt ${CONFIG_FILE}; then
-#   ${FIND} tcrypt:/ ${FIND_DEL_NAME} ${FIND_ADD_NAME} ${CONFIG}
+#   ${FIND} ${FIND_DEL_NAME} tcrypt:/ ${FIND_ADD_NAME}=${UNWANTED_FILES} ${CONFIG}=${CONFIG_FILE}
 #fi
 
-${FIND} --dry-run tcrypt:/ ${FIND_DEL_NAME} ${FIND_ADD_NAME} ${CONFIG}
+#if grep -q tdrive ${CONFIG_FILE}; then
+#   ${FIND} ${FIND_DEL_NAME} tdrive:/ ${FIND_ADD_NAME}=${UNWANTED_FILES} ${CONFIG}=${CONFIG_FILE}
+#fi
+
+${FIND} --dry-run ${FIND_DEL_NAME} gcrypt:/ ${FIND_ADD_NAME}=${UNWANTED_FILES} ${CONFIG}=${CONFIG_FILE}
