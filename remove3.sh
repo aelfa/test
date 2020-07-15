@@ -6,9 +6,9 @@ fi
 TESTPART="$@"
 ##########
 if [ ${TESTPART} == "testrun" ]; then
-    DRY-RUN="--dry-run"
+    DRYRUN="--dry-run"
 else
-    DRY-RUN=""
+    DRYRUN=""
 fi
 ##########
 if [ ${TESTPART} == "help" ]; then
@@ -98,20 +98,20 @@ do
 done
 
 if grep -q gcrypt ${CONFIG_FILE}; then
-   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} gcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
+   ${FIND} "${DRYRUN}" ${FIND_DEL_NAME} gcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
 fi
 
 if grep -q gdrive ${CONFIG_FILE}; then
-   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} gdrive: "${condition}" ${CONFIG}=${CONFIG_FILE}
+   ${FIND} "${DRYRUN}" ${FIND_DEL_NAME} gdrive: "${condition}" ${CONFIG}=${CONFIG_FILE}
 fi
 
 if grep -q tcrypt ${CONFIG_FILE}; then
-   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} tcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
+   ${FIND} "${DRYRUN}" ${FIND_DEL_NAME} tcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
 fi
 
 if grep -q tdrive ${CONFIG_FILE}; then
-   ${FIND} ${DRY-RUN} ${FIND_DEL_NAME} tdrive: "${condition}" ${CONFIG}=${CONFIG_FILE}
+   ${FIND} "${DRYRUN}" ${FIND_DEL_NAME} tdrive: "${condition}" ${CONFIG}=${CONFIG_FILE}
 fi
 
-##${FIND} --dry-run ${FIND_DEL_NAME} gcrypt: "${condition}" ${CONFIG}=${CONFIG_FILE}
+##${FIND} --dry-run ${FIND_DEL_NAME} gcrypt: ####${condition}" ${CONFIG}=${CONFIG_FILE}
 exit 1
