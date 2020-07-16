@@ -88,7 +88,9 @@ for ((i = 1; i < ${#UNWANTED_FILES[@]}; i++))
 do
     condition="${condition} ${FIND_ADD_NAME}=${UNWANTED_FILES[i]}"
 done
+
+echo "rclone delete start for ${TESTPART}"
 ${FIND} ${FIND_DEL_NAME} ${TESTPART} "${condition}" ${CONFIG}=${CONFIG_FILE}
 fi
-
+echo "rclone delete finished for ${TESTPART}"
 exit 1
