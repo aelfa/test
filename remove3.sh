@@ -21,7 +21,7 @@ else
 #########################
 FIND=$(which rclone)
 FIND_ADD_NAME='--include'
-FIND_DEL_NAME='delete -v'
+FIND_DEL_NAME='delete -v --no-traverse'
 FIND_DEL_EMPTY='--rmdirs'
 CONFIG='--config'
 CONFIG_FILE='/opt/appdata/plexguide/rclone.conf'
@@ -83,10 +83,10 @@ UNWANTED_FILES=(
 )
 
 #Folder Setting
-condition="--include=${UNWANTED_FILES[0]}"
+condition="--include '${UNWANTED_FILES[0]}'"
 for ((i = 1; i < ${#UNWANTED_FILES[@]}; i++))
 do
-    condition="${condition} ${FIND_ADD_NAME}=${UNWANTED_FILES[i]}"
+    condition="${condition} ${FIND_ADD_NAME} ${UNWANTED_FILES[i]}"
 done
 
 echo "rclone delete start for ${TESTPART}"
