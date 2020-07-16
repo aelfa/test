@@ -17,6 +17,8 @@ clear
 └──────────────────────────┘
 '
 exit 1
+else
+ ${FIND} ${FIND_DEL_NAME} ${TESTPART} "${condition}" ${CONFIG}=${CONFIG_FILE}
 fi
 
 #########################
@@ -107,7 +109,5 @@ done
 #fi
 
 ##${FIND} --dry-run ${FIND_DEL_NAME} gcrypt: ####${condition}" ${CONFIG}=${CONFIG_FILE}
-
-${FIND} ${FIND_DEL_NAME} ${TESTPART} "${condition}" ${CONFIG}=${CONFIG_FILE}
 
 exit 1
