@@ -3,26 +3,26 @@ if pidof -o %PPID -x "$0"; then
     exit 1
 fi
 
-#TESTPART="$@"
+TESTPART="$@"
 ##########
-#if [ ${TESTPART} == "help" ]; then
-#clear 
-# printf '
-#┌──────────────────────────┐
-#│-== Remove Garbage files via rclone ==-  │
-#│_________________________________________│
-#│ commands                                │
-#│ print help part                help     │
-#│ add drive:/folder                       │ 
-#└──────────────────────────┘
-#'
-#exit 1
-#fi
+if [ ${TESTPART} == "help" ]; then
+clear 
+ printf '
+┌──────────────────────────┐
+│-== Remove Garbage files via rclone ==-  │
+│_________________________________________│
+│ commands                                │
+│ print help part                help     │
+│ add drive:/folder                       │ 
+└──────────────────────────┘
+'
+exit 1
+fi
 
 #########################
 FIND=$(which rclone)
 FIND_ADD_NAME='--include'
-FIND_DEL_NAME='delete'
+FIND_DEL_NAME='delete -v'
 FIND_DEL_EMPTY='--rmdirs'
 CONFIG='--config'
 CONFIG_FILE='/opt/appdata/plexguide/rclone.conf'
