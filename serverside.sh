@@ -15,7 +15,7 @@ if grep -q server_side** ${RCLONEDOCKER}; then
      rccommand4=$(rclone reveal $(cat ${RCLONEDOCKER} | awk '$1 == "password2" {print $3}' | head -n 2 | tail -n 1))
    if [[ "${rccommand1}" == "${rccommand2}" && "${rccommand3}" == "${rccommand4}" ]]; then
       echo " --->> Server_side can be used <<-- "
-      echo " --->> TCrypt and GCrypt used the same password <<--
+      echo " --->> TCrypt and GCrypt used the same password <<--"
       rclone move -v --stats 5s --stats-one-line \ 
              --transfers 2 --checkers 4 --min-age 2M \
              --delete-empty-src-dirs --config ${RCLONEDOCKER} \
