@@ -13,7 +13,7 @@ function rclone_update_beta() {
 curl https://rclone.org/install.sh | sudo bash -s beta
 }
 
-function mergerfsupdate() {
+function mergerupdate() {
 sudo wget https://github.com/trapexit/mergerfs/releases/download/2.29.0/mergerfs_2.29.0.ubuntu-bionic_amd64.deb -O /tmp/mergerfs.deb
 sudo dpkg -i /tmp/mergerfs.deb
 sudo rm -rf /tmp/mergerfs.deb 
@@ -55,8 +55,8 @@ EOF
 
   case $typed in
 
-  Y) mergerfsupdate ;;
-  y) mergerfsupdate ;;
+  Y) mergerupdate ;;
+  y) mergerupdate ;;
   z) clear && exit ;;
   Z) clear && exit ;;
   *) badinput ;;
