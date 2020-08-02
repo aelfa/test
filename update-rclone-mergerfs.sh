@@ -30,6 +30,14 @@ EOF
   fi
 }
 
+function updateall() {
+apt-get update -y
+apt-get upgrade -y
+apt-get dist-upgrade -y
+apt-get autoremove -y
+apt-get autoclean -y
+}
+
 function mergerfsupdate() {
 mgversion="$(curl -s https://api.github.com/repos/trapexit/mergerfs/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')"
 mgstored="$(mergerfs -v | grep 'mergerfs version:' | awk '{print $3}')"
@@ -100,6 +108,7 @@ EOF
 function update() {
 
 sudocheck 
+updateall
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
