@@ -3,7 +3,7 @@
 # Create the environment file for crond
 printenv | sed 's/^\([a-zA-Z0-9_]*\)=\(.*\)$/export \1="\2"/g' | grep -E "^export RCLONE" > /cron/rclone.env
 
-RCLONE_CROND_HEALTHCHECK_URL=https://hchk.io/sasa3211-as32-sd32-43ds-sdvbn561cx3456
+RCLONE_CROND_HEALTHCHECK_URL=https://hc-ping.com/e40a058b-90fb-4983-aee5-3f8d229e3205
 function check (){
       # Send the payload to the API
       if [[ -z $RCLONE_CROND_HEALTHCHECK_URL ]]; then
