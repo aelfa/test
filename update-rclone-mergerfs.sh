@@ -14,9 +14,10 @@ curl https://rclone.org/install.sh | sudo bash -s beta
 }
 
 function mergerupdate() {
-sudo wget https://github.com/trapexit/mergerfs/releases/download/2.29.0/mergerfs_2.29.0.ubuntu-bionic_amd64.deb -O /tmp/mergerfs.deb
-sudo dpkg -i /tmp/mergerfs.deb
-sudo rm -rf /tmp/mergerfs.deb 
+mgversion="$(curl -s https://api.github.com/repos/trapexit/mergerfs/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')"
+wget https://github.com/trapexit/mergerfs/releases/download/${mgversion}/mergerfs_${mgversion}.ubuntu-bionic_amd64.deb -O /tmp/mergerfs.deb
+dpkg -i /tmp/mergerfs.deb
+rm -rf /tmp/mergerfs.deb 
 }
 
 function sudocheck () {
