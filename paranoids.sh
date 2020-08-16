@@ -16,7 +16,7 @@ then
     exit 2
 fi
 
-if [ "$CAPACITY_LIMIT" == "" ]; then
+if [ "$CAPACITY_LIMIT" != 'null' ]; then
     CAPACITY_LIMIT=${CAPACITY_LIMIT}
 else
     CAPACITY_LIMIT=75
