@@ -1,7 +1,15 @@
 #!/bin/bash
+  if [[ $EUID -ne 0 ]]; then
+    tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔️  You Must Execute as a SUDO USER (with sudo) or as ROOT!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+    exit 0
+  fi
 
 if [ ! -d "/opt/var/" ]; then
-sudo mkdir -p /opt/var
+sudo mkdir -p /opt/var && sudo chown -cR 1000:1000 /opt/var && sudo chmod -CR 755 /opt/var
 fi 
 
 logfile="/opt/var/plexlibstats.log"
