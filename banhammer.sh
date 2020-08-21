@@ -1,0 +1,8 @@
+#!/bin/bash
+
+network=$(ifconfig | grep -E 'eno1|enp|ens5' | awk '{print $1}' | sed -e 's/://g')
+
+iptables -A INPUT -p tcp --dport 22 -i $network -m state --state NEW -m recent --set
+iptables -A INPUT -p tcp --dport 22 -i $network -m state --state ESTABLISHED -m recent --update --seconds 60 --hitcount 2 -j REJECT --reject-with tcp-reset
+
+exit 0
