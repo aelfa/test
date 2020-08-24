@@ -82,7 +82,7 @@ for i in ${mounts[@]}; do
          --vfs-cache-max-size="${VFS_CACHE_MAX_SIZE}" \
          --vfs-read-chunk-size-limit="${VFS_READ_CHUNK_SIZE_LIMIT}" \
          --vfs-read-chunk-size="${VFS_READ_CHUNK_SIZE}" \
-         --buffer-size=${BUFFER_SIZE} --fast-list \
+         --buffer-size="${BUFFER_SIZE}" --fast-list \
          --tpslimit-burst=50 --stats=10s \
          --drive-chunk-size=128M --drive-use-trash=false \
          --drive-server-side-across-configs=true \
