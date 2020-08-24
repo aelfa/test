@@ -38,8 +38,7 @@ for i in ${mounts[@]}; do
     /usr/bin/fusermount -uzq /mnt/$i > /dev/null
   fi
   echo; echo create logfolder $i-drive; echo
-  mkdir -p /logs/$i/rclone-$i.log
-  chmod -R 778 /logs/ && chown -R abc:abc /logs/
+  mkdir -p /logs/$i/ && chmod -R 778 /logs/ && chown -R abc:abc /logs/
   touch /logs/$i/rclone-$i.log
   echo; echo STARTING MOUNT $i; echo
   /usr/bin/rclone mount $i: /mnt/$i \
