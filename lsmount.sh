@@ -75,7 +75,7 @@ for i in ${mounts[@]}; do
          --log-level="${LOFLEVEL}" \
          --uid=1000 --gid=1000 --umask=002 \
          --allow-other --timeout=1h --tpslimit=8 \
-         --drive-skip-gdocs --user-agent="${UAGENT}: \
+         --drive-skip-gdocs --user-agent="${UAGENT}" \
          --dir-cache-time="${DIR_CACHE_TIME}" \
          --vfs-cache-mode="${VFS_CACHE_MODE}" \
          --vfs-cache-max-age="${VFS_CACHE_MAX_AGE}" \
