@@ -25,14 +25,14 @@ RC_ADDR=${RC_ADDR:-0.0.0.0:25975}
 RC_USER=${RC_USER:-user}
 RC_PASS=${RC_PASS:-xxx}
 POLL_INTERVAL=${POLL_INTERVAL:-5m}
-LOGLEVEL=${LOGLEVEL}
-UAGENT=${UAGENT}
+LOGLEVEL=${LOGLEVEL:-INFO}
+UAGENT=${UAGENT:-somerandstring}
 
 
 # These flags are applied to all sets. Tweak them as you like
 FLAGS="
   --config=${config}
-  --log-file=/logs/drive/rclone-{$i}.log \
+  --log-file=/logs/drive/rclone-$i.log
   --log-level=${LOFLEVEL}
   --uid=1000 --gid=1000 --umask=002
   --allow-other
@@ -60,15 +60,18 @@ FLAGS="
   --drive-server-side-across-configs=true
   --drive-stop-on-upload-limit
   "
+
 for i in ${mounts[@]}; do
   echo; echo CREATE EMPTY DIRECTORIES for $i; echo
-  mkdir -p /mnt/${i}
+  mkdir -p /mnt/$i
   #if [ size command here for check ]; then  when failes.
   #   echo; echo CHECK FOR EMPTY MOUNTS & DIRECTORIES for $i; echo
-  #   /bin/fusermount -uz /mnt/${i} > /dev/null
+  #   /bin/fusermount -uz /mnt/$i > /dev/null
   #fi
-  echo; echo STARTING MOUNT of from $i; echo
-  /bin/rclone mount $i: -v --config=${config} ${FLAGS} /mnt/{$i}
+  while IFS="$IFS1" read i ;do
+     echo; echo STARTING MOUNT of from $i; echo
+     /usr/bin/rclone mount $i: ${FLAGS} /mnt/$i
+  done
 done
 
 ## }} ##
