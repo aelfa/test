@@ -69,7 +69,6 @@ for i in ${mounts[@]}; do
   #fi
   echo; echo STARTING MOUNT of from $i; echo
   /bin/rclone mount $i: -v --config=${config} ${FLAGS} /mnt/{$i}
-  echo; echo REMOVING EMPTY DIRECTORIES from $i; echo
 done
 
 ## }} ##
