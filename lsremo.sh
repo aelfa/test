@@ -10,7 +10,7 @@ IFS=$'\n'
 filter="$1"
 config=/config/rclone.conf
 #rclone listremotes | gawk "$filter"
-mapfile -t mounts < <(eval rclone listremotes --config=${config} | grep "$filter" | sed -e 's/[pgunion:]//g' | sed -e 's/[GDSA00-99C:]//g' | sed '/^$/d')
+mapfile -t mounts < <(eval rclone listremotes --config=${config} | grep "$filter" | sed -e 's/[GDSA00-99C:]//g' | sed '/^$/d')
 ## function source end
 
 
