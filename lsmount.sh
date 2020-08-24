@@ -33,8 +33,8 @@ UAGENT=${UAGENT:-somerandstring}
 for i in ${mounts[@]}; do
   echo; echo CREATE EMPTY DIRECTORIES for $i; echo
   mkdir -p /mnt/$i
-  if [[ $(ls -a /mnt/$i | wc -l)" -ne 0 ]]; then
-     echo; echo unmounting for $i drive; echo
+  if [[ "$(ls -a /mnt/$i | wc -l)" -ne 2 && "$(ls -a /mnt/$i | wc -l)" -ne 0 ]]; then     
+    echo; echo unmounting for $i drive; echo
     /usr/bin/fusermount -uzq /mnt/$i > /dev/null
   fi
   echo; echo create logfolder for $i; echo
