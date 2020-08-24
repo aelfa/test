@@ -39,9 +39,9 @@ FLAGS="
   --timeout=1h
   --tpslimit=8
   --drive-skip-gdocs
-  --user-agent=${UAGENT}
-  --dir-cache-time=${DIR_CACHE_TIME}
-  --vfs-cache-mode=${VFS_CACHE_MODE}
+  --user-agent="${UAGENT}"
+  --dir-cache-time="${DIR_CACHE_TIME}"
+  --vfs-cache-mode="${VFS_CACHE_MODE}"
   --vfs-cache-max-age=${VFS_CACHE_MAX_AGE}
   --vfs-cache-max-size=${VFS_CACHE_MAX_SIZE}
   --vfs-read-chunk-size-limit=${VFS_READ_CHUNK_SIZE_LIMIT}
@@ -70,18 +70,18 @@ for i in ${mounts[@]}; do
   #fi
   echo; echo STARTING MOUNT of from $i; echo
   /usr/bin/rclone mount $i: /mnt/$i \
-         --config=${config} \
+         --config="${config}" \
          --log-file=/logs/drive/rclone-$i.log \
-         --log-level=${LOFLEVEL} \
+         --log-level="${LOFLEVEL}" \
          --uid=1000 --gid=1000 --umask=002 \
          --allow-other --timeout=1h --tpslimit=8 \
-         --drive-skip-gdocs --user-agent=${UAGENT} \
-         --dir-cache-time=${DIR_CACHE_TIME} \
-         --vfs-cache-mode=${VFS_CACHE_MODE} \
-         --vfs-cache-max-age=${VFS_CACHE_MAX_AGE} \
-         --vfs-cache-max-size=${VFS_CACHE_MAX_SIZE} \
-         --vfs-read-chunk-size-limit=${VFS_READ_CHUNK_SIZE_LIMIT} \
-         --vfs-read-chunk-size=${VFS_READ_CHUNK_SIZE} \
+         --drive-skip-gdocs --user-agent="${UAGENT}: \
+         --dir-cache-time="${DIR_CACHE_TIME}" \
+         --vfs-cache-mode="${VFS_CACHE_MODE}" \
+         --vfs-cache-max-age="${VFS_CACHE_MAX_AGE}" \
+         --vfs-cache-max-size="${VFS_CACHE_MAX_SIZE}" \
+         --vfs-read-chunk-size-limit="${VFS_READ_CHUNK_SIZE_LIMIT}" \
+         --vfs-read-chunk-size="${VFS_READ_CHUNK_SIZE}" \
          --buffer-size=${BUFFER_SIZE} --fast-list \
          --tpslimit-burst=50 --stats=10s \
          --drive-chunk-size=128M --drive-use-trash=false \
