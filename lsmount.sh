@@ -68,9 +68,8 @@ for i in ${mounts[@]}; do
   #   echo; echo CHECK FOR EMPTY MOUNTS & DIRECTORIES for $i; echo
   #   /bin/fusermount -uz /mnt/$i > /dev/null
   #fi
-  while IFS="$IFS1" read i ;do
-     echo; echo STARTING MOUNT of from $i; echo
-     /usr/bin/rclone mount $i: /mnt/$i \
+  echo; echo STARTING MOUNT of from $i; echo
+  /usr/bin/rclone mount $i: /mnt/$i \
          --config=${config} \
          --log-file=/logs/drive/rclone-$i.log \
          --log-level=${LOFLEVEL} \
@@ -84,14 +83,10 @@ for i in ${mounts[@]}; do
          --vfs-read-chunk-size-limit=${VFS_READ_CHUNK_SIZE_LIMIT} \
          --vfs-read-chunk-size=${VFS_READ_CHUNK_SIZE} \
          --buffer-size=${BUFFER_SIZE} --fast-list \
-         --tpslimit-burst=50 --stats=10s \ 
-         --max-backlog=2000000 --ignore-case \ 
-         --no-update-modtime --drive-chunk-size=128M \
-         --drive-use-trash=false \
-         --track-renames \
+         --tpslimit-burst=50 --stats=10s \
+         --drive-chunk-size=128M --drive-use-trash=false \
          --drive-server-side-across-configs=true \
          --drive-stop-on-upload-limit
-  done
 done
 
 ## }} ##
