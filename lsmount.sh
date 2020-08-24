@@ -70,7 +70,27 @@ for i in ${mounts[@]}; do
   #fi
   while IFS="$IFS1" read i ;do
      echo; echo STARTING MOUNT of from $i; echo
-     /usr/bin/rclone mount $i: ${FLAGS} /mnt/$i
+     /usr/bin/rclone mount $i: /mnt/$i \
+         --config=${config} \
+         --log-file=/logs/drive/rclone-$i.log \
+         --log-level=${LOFLEVEL} \
+         --uid=1000 --gid=1000 --umask=002 \
+         --allow-other --timeout=1h --tpslimit=8 \
+         --drive-skip-gdocs --user-agent=${UAGENT} \
+         --dir-cache-time=${DIR_CACHE_TIME} \
+         --vfs-cache-mode=${VFS_CACHE_MODE} \
+         --vfs-cache-max-age=${VFS_CACHE_MAX_AGE} \
+         --vfs-cache-max-size=${VFS_CACHE_MAX_SIZE} \
+         --vfs-read-chunk-size-limit=${VFS_READ_CHUNK_SIZE_LIMIT} \
+         --vfs-read-chunk-size=${VFS_READ_CHUNK_SIZE} \
+         --buffer-size=${BUFFER_SIZE} --fast-list \
+         --tpslimit-burst=50 --stats=10s \ 
+         --max-backlog=2000000 --ignore-case \ 
+         --no-update-modtime --drive-chunk-size=128M \
+         --drive-use-trash=false \
+         --track-renames \
+         --drive-server-side-across-configs=true \
+         --drive-stop-on-upload-limit
   done
 done
 
