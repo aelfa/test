@@ -41,22 +41,26 @@ fi
 
 ## RUN MOUNT ##
 for i in ${mounts[@]}; do
-  echo; echo CREATE EMPTY DIRECTORIES $i; echo
-  mkdir -p /mnt/$i
-  chown -hR abc:abc /mnt/$i
-  chmod -R 775 /mnt/$i
-  if [[ "$(ls -a /mnt/$i | wc -l)" -ne 2 && "$(ls -a /mnt/$i | wc -l)" -ne 0 ]]; then     
-    echo; echo unmounting $i-drive; echo
-    fusermount -uzq /mnt/$i >> /dev/null
+  if [[ "$(ls /mnt/$i | wc -l)" -gt 1 ]]; then     
+     echo; echo CREATE EMPTY DIRECTORIES $i; echo
+     mkdir -p /mnt/$i
+     chown -hR abc:abc /mnt/$i
+     chmod -R 775 /mnt/$i
+  fi
+  if [[ "$(ls /mnt/$i | wc -l)" -gt 1 ]]; then     
+    echo; echo UNMOUNTING $i; echo
+    fusermount -uzq /mnt/$i
   fi
   if [[ -f "${SMOUNT}/$i-mount.sh" ]]; then
+     echo; echo REMOVE Script $i; echo
      rm -f "${SMOUNT}/$i-mount.sh"
   fi
-  echo; echo create logfolder $i-drive; echo
-  mkdir -p /logs/$i/ && chmod -R 775 /logs/ && chown -hR abc:abc /logs/
+  echo; echo CREATE $i LOGFOLDER; echo
+  mkdir -p /logs && mkdir -p /logs/$i/
+  chmod -R 775 /logs/ && chown -hR abc:abc /logs/
   touch /logs/$i/rclone-$i.log
   echo; echo CREATE MOUNT COMMAND $i; echo
-  echo -e "rclone mount $i: /mnt/$i \
+  echo "rclone mount $i: /mnt/$i \
          --config=${config} \
          --log-file=/logs/$i/rclone-$i.log \
          --log-level=${LOGLEVEL} \
@@ -77,7 +81,6 @@ for i in ${mounts[@]}; do
          echo "-> Mounting $i <-"
          bash ${SMOUNT}/$i-mount.sh
 done
-
 
 ## }} ##
   ## then merger command ##
