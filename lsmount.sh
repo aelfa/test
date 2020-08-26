@@ -56,7 +56,7 @@ for i in ${mounts[@]}; do
   mkdir -p /logs/$i/ && chmod -R 775 /logs/ && chown -hR abc:abc /logs/
   touch /logs/$i/rclone-$i.log
   echo; echo CREATE MOUNT COMMAND $i; echo
-  echo "rclone mount $i: /mnt/$i \
+  echo -e "rclone mount $i: /mnt/$i \
          --config=${config} \
          --log-file=/logs/$i/rclone-$i.log \
          --log-level=${LOGLEVEL} \
@@ -75,6 +75,7 @@ for i in ${mounts[@]}; do
          --drive-stop-on-upload-limit & " >> ${SMOUNT}/$i-mount.sh
          chmod 775 ${SMOUNT}/$i-mount.sh && chown abc:abc ${SMOUNT}/$i-mount.sh
          echo "-> Mounting $i <-"
+         bash ${SMOUNT}/$i-mount.sh
 done
 
 
