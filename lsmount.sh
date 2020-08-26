@@ -79,9 +79,26 @@ for i in ${mounts[@]}; do
          --drive-stop-on-upload-limit & " >> ${SMOUNT}/$i-mount.sh
          chmod 775 ${SMOUNT}/$i-mount.sh && chown abc:abc ${SMOUNT}/$i-mount.sh
          echo "-> Mounting $i <-"
+         UFS_PATH="/mnt/$i=RW"
          bash ${SMOUNT}/$i-mount.sh
+         echo "${UFS_PATH}" >> /tmp/ufstmp.path
+
 done
 
-## }} ##
-  ## then merger command ##
-## {{ ##
+exit
+echo "
+UFS_PATH=$(cat /tmp/ufstmp.path)
+mount_command='/usr/bin/mergerfs -o sync_read,auto_cache,dropcacheonclose=true,use_ino,allow_other,func.getattr=newest,category.create=ff,minfreespace=0,fsname=mergerfs ${UFS_PATH} /mnt/unionfs'
+
+$mount_command
+MERGERFS_PID=$(pgrep mergerfs)
+
+while true; do
+
+  if [ -z ${MERGERFS_PID} ] || [ ! -e /proc/${MERGERFS_PID} ]; then
+    $mount_command
+    MERGERFS_PID=$(pgrep mergerfs)
+  fi
+  sleep 10s
+done
+" 
