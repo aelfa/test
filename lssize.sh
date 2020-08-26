@@ -2,13 +2,13 @@
 # shellcheck shell=bash
 # Copyright (c) 2020, MrDoob
 # All rights reserved.
-# cleanup remotes based of rclone.conf file
-# only clean remotes thats inside the rclone.conf 
+# 
 
 ## function source start
 IFS=$'\n'
 > mount.sizes
 filter=$1
+## function source end
 
 config=/config/rclone.conf
 #rclone listremotes | gawk "$filter"
