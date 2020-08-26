@@ -29,29 +29,25 @@ LOGLEVEL=${LOGLEVEL:-INFO}
 UAGENT=${UAGENT:-somerandstring}
 SMOUNT=/config/mount-scripts
 
-if [[ ! -d ${SMOUNT} ]]; then
-  mkdir -p ${SMOUNT} 
-  chown -hR abc:abc ${SMOUNT}
-  chmod -R 775 ${SMOUNT}
+if [ ! -d ${SMOUNT} ]; then
+   mkdir -p ${SMOUNT} && chown -hR abc:abc ${SMOUNT} && chmod -R 775 ${SMOUNT}
 else
-  mkdir -p ${SMOUNT} 
-  chown -hR abc:abc ${SMOUNT}
-  chmod -R 775 ${SMOUNT}
+   chown -hR abc:abc ${SMOUNT} && chmod -R 775 ${SMOUNT}
 fi
 
 ## RUN MOUNT ##
 for i in ${mounts[@]}; do
-  if [[ "$(ls /mnt/$i | wc -l)" -gt 1 ]]; then     
+  if [ "$(ls /mnt/$i | wc -l)" -gt 1 ]; then     
      echo; echo CREATE EMPTY DIRECTORIES $i; echo
      mkdir -p /mnt/$i
      chown -hR abc:abc /mnt/$i
      chmod -R 775 /mnt/$i
   fi
-  if [[ "$(ls /mnt/$i | wc -l)" -gt 1 ]]; then     
+  if [ "$(ls /mnt/$i | wc -l)" -gt 1 ]; then     
     echo; echo UNMOUNTING $i; echo
     fusermount -uzq /mnt/$i
   fi
-  if [[ -f "${SMOUNT}/$i-mount.sh" ]]; then
+  if [ -f "${SMOUNT}/$i-mount.sh" ]; then
      echo; echo REMOVE Script $i; echo
      rm -f "${SMOUNT}/$i-mount.sh"
   fi
