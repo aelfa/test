@@ -32,16 +32,19 @@ UAGENT=${UAGENT:-somerandstring}
 
 for i in ${mounts[@]}; do
   echo; echo CREATE EMPTY DIRECTORIES $i; echo
-  mkdir -p /mnt/$i
+  mkdir -p /mnt/$i && chown -hR abc:abc /mnt/$i && chmod -R 775 /mnt/$i
   if [[ "$(ls -a /mnt/$i | wc -l)" -ne 2 && "$(ls -a /mnt/$i | wc -l)" -ne 0 ]]; then     
     echo; echo unmounting $i-drive; echo
-    /usr/bin/fusermount -uzq /mnt/$i > /dev/null
+    /usr/bin/fusermount -uzq /mnt/$i >> /dev/null
+  fi
+  if [[ -f "/mount-scripts/$i-mount.sh" ]]; then
+     rm -f /mount-scripts/$i-mount.sh
   fi
   echo; echo create logfolder $i-drive; echo
-  mkdir -p /logs/$i/ && chmod -R 778 /logs/ && chown -R abc:abc /logs/
+  mkdir -p /logs/$i/ && chmod -R 775 /logs/ && chown -hR abc:abc /logs/
   touch /logs/$i/rclone-$i.log
-  echo; echo STARTING MOUNT $i; echo
-  /usr/bin/rclone mount $i: /mnt/$i \
+  echo; echo CREATE MOUNT COMMAND $i; echo
+  echo /usr/bin/rclone mount $i: /mnt/$i \
          --config="${config}" \
          --log-file=/logs/$i/rclone-$i.log \
          --log-level="${LOGLEVEL}" \
@@ -57,7 +60,7 @@ for i in ${mounts[@]}; do
          --buffer-size="${BUFFER_SIZE}" --fast-list \
          --drive-chunk-size=128M --drive-use-trash=false \
          --drive-server-side-across-configs=true \
-         --drive-stop-on-upload-limit
+         --drive-stop-on-upload-limit >> /mount-scripts/$i-mount.sh
 done
 
 ## }} ##
