@@ -17,5 +17,5 @@ mapfile -t mounts < <(eval rclone listremotes --config=${config} | grep "$filter
 
 for i in ${mounts[@]}; do
   echo; echo For $i | tee -a mount.sizes
-  rclone size $i --config=${config} --fast-list | tee -a mount.sizes
+  rclone size $i: --config=${config} --fast-list | tee -a mount.sizes
 done
