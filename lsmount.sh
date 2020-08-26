@@ -47,21 +47,16 @@ for i in ${mounts[@]}; do
   chmod -R 775 /mnt/$i
   if [[ "$(ls -a /mnt/$i | wc -l)" -ne 2 && "$(ls -a /mnt/$i | wc -l)" -ne 0 ]]; then     
     echo; echo unmounting $i-drive; echo
-    /usr/bin/fusermount -uzq /mnt/$i >> /dev/null
+    fusermount -uzq /mnt/$i >> /dev/null
   fi
-  if [[ -f ${SMOUNT}/$i-mount.sh" ]]; then
-     rm -f ${SMOUNT}/$i-mount.sh
+  if [[ -f "${SMOUNT}/$i-mount.sh" ]]; then
+     rm -f "${SMOUNT}/$i-mount.sh"
   fi
   echo; echo create logfolder $i-drive; echo
   mkdir -p /logs/$i/ && chmod -R 775 /logs/ && chown -hR abc:abc /logs/
   touch /logs/$i/rclone-$i.log
   echo; echo CREATE MOUNT COMMAND $i; echo
-  echo "#!/usr/bin/with-contenv bash
-        # shellcheck shell=bash \ 
-        # Copyright (c) 2020, MrDoob \
-        # All rights reserved. \
-        # mount $i command \
-         /usr/bin/rclone mount $i: /mnt/$i \
+  echo "rclone mount $i: /mnt/$i \
          --config=${config} \
          --log-file=/logs/$i/rclone-$i.log \
          --log-level=${LOGLEVEL} \
@@ -77,8 +72,7 @@ for i in ${mounts[@]}; do
          --buffer-size=${BUFFER_SIZE} --fast-list \
          --drive-chunk-size=128M --drive-use-trash=false \
          --drive-server-side-across-configs=true \
-         --drive-stop-on-upload-limit & \ 
-         " >> ${SMOUNT}/$i-mount.sh
+         --drive-stop-on-upload-limit & " >> ${SMOUNT}/$i-mount.sh
          chmod 775 ${SMOUNT}/$i-mount.sh && chown abc:abc ${SMOUNT}/$i-mount.sh
          echo "-> Mounting $i <-"
 done
