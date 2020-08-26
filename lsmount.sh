@@ -27,8 +27,7 @@ RC_PASS=${RC_PASS:-xxx}
 POLL_INTERVAL=${POLL_INTERVAL:-5m}
 LOGLEVEL=${LOGLEVEL:-INFO}
 UAGENT=${UAGENT:-somerandstring}
-SMOUNT=/confi/mount-scripts
-
+SMOUNT=/config/mount-scripts
 
 if [[ ! -d ${SMOUNT} ]]; then
   mkdir -p ${SMOUNT} 
@@ -80,7 +79,10 @@ for i in ${mounts[@]}; do
          --drive-server-side-across-configs=true \
          --drive-stop-on-upload-limit & \ 
          " >> ${SMOUNT}/$i-mount.sh
+         chmod 775 ${SMOUNT}/$i-mount.sh && chown abc:abc ${SMOUNT}/$i-mount.sh
+         echo "-> Mounting $i <-"
 done
+
 
 ## }} ##
   ## then merger command ##
