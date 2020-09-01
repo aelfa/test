@@ -9,7 +9,7 @@ done
 sleep 5
 cd /opt/coreapps/apps/
 
-wget -N https://raw.githubusercontent.com/doob187/test/master/portainer-ce.yml  && 
+sudo wget https://raw.githubusercontent.com/doob187/test/master/portainer-ce.yml  && 
 sudo ansible-playbook /opt/coreapps/apps/portainer-ce.yml 
 
 sleep 5
@@ -20,3 +20,9 @@ for container in $containers; do
     echo " -->> Starting $container <<-- "
     sudo docker start $container >> /dev/null
 done
+
+echo " all done " 
+sudo rm -f /opt/coreapps/apps/portainer.yml
+sudo mv /opt/coreapps/apps/portainer-ce.yml /opt/coreapps/apps/portainer.yml
+
+exit 0
