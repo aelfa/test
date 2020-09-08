@@ -3,22 +3,25 @@
 ## mkdir -p /opt/appdata/ouroboros/hooks
 ## chown -cR 1000:1000 /opt/appdata/ouroboros 
 ## chmod -cR 755 /opt/appdata/ouroboros 
----
-version: '3'
+version: "3"
 services:
   ouroboros:
     container_name: ouroboros
-    hostname: ouroboros
-    image: gmt2001/ouroboros
-    environment:
-      - CLEANUP=true
-      - INTERVAL=300
-      - LOG_LEVEL=info
-      - SELF_UPDATE=true
-      - LATEST=true
-      - IGNORE=mongo influxdb postgres mariadb
-      - TZ=America/New_York
+    image: thisismental/ouroboros:latest
     restart: unless-stopped
+    environment:
+      - PUID=100
+      - PGID=100
+      - TZ=Europe/Paris
+      - CLEANUP=true
+      - CLEANUP_UNUSED_VOLUMES=true
+      - INTERVAL=86400
+      - LOG_LEVEL=info
+      - SELF_UPDATE=false
+      - LATEST=true
+      - IGNORE=vpn
+      - SKIP_STARTUP_NOTIFICATIONS=false
+      - NOTIFIERS=discord://hook
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/appdata/ouroboros/hooks:/opt/appdata/ouroboros/hooks
