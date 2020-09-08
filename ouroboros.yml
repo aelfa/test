@@ -24,4 +24,4 @@ services:
       - NOTIFIERS=discord://hook
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/appdata/ouroboros/hooks:/opt/appdata/ouroboros/hooks
+      - /opt/appdata/ouroboros/hooks:/app/pyouroboros/hooks
