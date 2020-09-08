@@ -7,7 +7,7 @@ version: "3"
 services:
   ouroboros:
     container_name: ouroboros
-    image: thisismental/ouroboros:latest
+    image: mrdoob/ouroboros:latest
     restart: unless-stopped
     environment:
       - PUID=100
@@ -21,7 +21,7 @@ services:
       - LATEST=true
       - IGNORE=vpn
       - SKIP_STARTUP_NOTIFICATIONS=false
-      - NOTIFIERS=discord://hook
+      - NOTIFIERS=discord://Ouroboros@{WEBHOOKID}/{Token}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/appdata/ouroboros/hooks:/app/pyouroboros/hooks
