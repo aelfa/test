@@ -1,0 +1,46 @@
+#!/bin/bash
+# Title:      ouroboros
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    # FACTS #######################################################################
+    - name: 'Set Known Facts'
+      set_fact:
+        pgrole: 'ouroboros'
+    - name: 'Setting {{pgrole}} Volumes'
+      set_fact:
+        pg_volumes:
+          - '/var/run/docker.sock:/var/run/docker.sock'
+          - '/etc/localtime:/etc/localtime:ro'
+          - '/opt/appdata/ouroboros/hooks/:app/pyouroboros/hooks
+
+    - name: 'Setting {{pgrole}} ENV'
+      set_fact:
+        pg_env:
+          LATEST: 'true' #Some containers will break if set to latest, use tag already set by setting this to false
+          CLEANUP: 'true'
+          CLEANUP_UNUSED_VOLUMES: 'true'
+          INTERVAL: '86400' #cEvery 24 hours in seconds
+          LOG_LEVEL: 'info'
+          SELF_UPDATE: 'false'
+          IGNORE: 'mariadb influxdb mongo postgres'
+          SKIP_STARTUP_NOTIFICATIONS: 'false'
+          NOTIFIERS: '#discord://Ouroboros@{WEBHOOKID}/{Token}#'
+          
+    # MAIN DEPLOYMENT #############################################################
+    - name: 'Deploying {{pgrole}}'
+      docker_container:
+        name: '{{pgrole}}'
+        image: 'mrdoob/ouroboros:latest'
+        pull: yes
+        volumes: '{{pg_volumes}}'
+        env: '{{pg_env}}'
+        restart_policy: unless-stopped
+        networks:
+          - name: plexguide
+            aliases:
+              - 'ouroboros'
+        state: started
