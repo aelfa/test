@@ -15,7 +15,7 @@
         pg_volumes:
           - '/var/run/docker.sock:/var/run/docker.sock'
           - '/etc/localtime:/etc/localtime:ro'
-          - '/opt/appdata/ouroboros/hooks/:app/pyouroboros/hooks
+          - '/opt/appdata/ouroboros/hooks/:app/pyouroboros/hooks'
 
     - name: 'Setting {{pgrole}} ENV'
       set_fact:
@@ -28,7 +28,7 @@
           SELF_UPDATE: 'false'
           IGNORE: 'mariadb influxdb mongo postgres plex'
           SKIP_STARTUP_NOTIFICATIONS: 'false'
-          NOTIFIERS: '#discord://Ouroboros@{WEBHOOKID}/{Token}#'
+          NOTIFIERS: 'discord://Ouroboros@'
           
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
