@@ -15,7 +15,7 @@
         pg_volumes:
           - '/var/run/docker.sock:/var/run/docker.sock'
           - '/etc/localtime:/etc/localtime:ro'
-          - '/opt/appdata/ouroboros/hooks/:app/pyouroboros/hooks'
+          - '/opt/appdata/ouroboros/hooks:app/pyouroboros/hooks'
 
     - name: 'Setting {{pgrole}} ENV'
       set_fact:
