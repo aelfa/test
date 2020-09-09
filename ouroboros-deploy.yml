@@ -28,7 +28,7 @@
           SELF_UPDATE: 'false'
           IGNORE: 'mariadb influxdb mongo postgres plex'
           SKIP_STARTUP_NOTIFICATIONS: 'false'
-          NOTIFIERS: 'discord://Ouroboros@'
+          NOTIFIERS: 'discord://Ouroboros@WEBHOOKID/Token'
           
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
