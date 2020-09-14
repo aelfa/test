@@ -11,3 +11,7 @@ sed -i 's/Locale "-"/Locale "LC_ALL=en_US.UTF-8"/g' /etc/vnstat.conf
 /etc/init.d/vnstat restart 2>&1 >>/dev/null
 
 echo "done'
+sudo docker restart uploader
+
+sleep 1
+exit
