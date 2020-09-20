@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
-drivespace=$(df -h / --local | tail -n +2 | awk '{print $4}' | sed -e 's/G//g')
+drivespace=$(df -Bg / --local | tail -n +2 | awk '{print $4}' | sed -e 's/G//g')
 if [[ "$drivespace" -le "40" ]]; then
   echo "less then 40GB "
 elif [[ "$drivespace" -le "80" && "$drivespace" -gt "40" ]]; then
