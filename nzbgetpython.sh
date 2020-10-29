@@ -15,6 +15,9 @@ sudo wget -N https://raw.githubusercontent.com/h1f0x/nzbget-python3-scripts/mast
 sudo wget -N https://raw.githubusercontent.com/h1f0x/nzbget-python3-scripts/master/python3/flatten-dirs.py
 sudo wget -N https://raw.githubusercontent.com/h1f0x/nzbget-python3-scripts/master/python3/reverse-name.py
 sudo wget -N https://raw.githubusercontent.com/h1f0x/nzbget-python3-scripts/master/python3/unzip.py
+sudo wget -N https://raw.githubusercontent.com/TRaSH-/Guides/master/docs/NZBGet/scripts/WtFnZb-Renamer/WtFnZb-Renamer.py
+sudo wget -N https://raw.githubusercontent.com/TRaSH-/Guides/master/docs/NZBGet/scripts/HashRenamer/HashRenamer.py
+sudo wget -N https://raw.githubusercontent.com/TRaSH-/Guides/master/docs/NZBGet/scripts/Clean/Clean.py
 }
 
 function script_install() {
