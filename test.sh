@@ -71,7 +71,7 @@ while true; do
       sudo usermod -s /bin/bash $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
       sudo usermod -aG video $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
       sudo usermod -aG docker $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
-      result=$(echo "All done)
+      result=$(echo "All done")
       ;;
     3 )
       ## run the rest after here 
