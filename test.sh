@@ -1,54 +1,65 @@
 #!/bin/bash
 
-# while-menu: a menu-driven system information program
+# while-menu-dialog: a menu driven system information program
 
-DELAY=3 # Number of seconds to display results
+DIALOG_CANCEL=1
+DIALOG_ESC=255
+HEIGHT=0
+WIDTH=0
+
+display_result() {
+  dialog --title "$1" \
+    --no-collapse \
+    --msgbox "$result" 0 0
+}
 
 while true; do
-  clear
-  cat << _EOF_
-Please Select:
-
-1. Display System Information
-2. Display Disk Space
-3. Display Home Space Utilization
-0. Quit
-
-_EOF_
-
-  read -p "Enter selection [0-3] > "
-
-  if [[ $REPLY =~ ^[0-3]$ ]]; then
-    case $REPLY in
-      1)
-        echo "Hostname: $HOSTNAME"
-        uptime
-        sleep $DELAY
-        continue
-        ;;
-      2)
-        df -h /opt/ --local
-        sleep $DELAY
-        continue
-        ;;
-      3)
-        if [[ $(id -u) -eq 0 ]]; then
-          echo "Home Space Utilization (All Users)"
-          du -sh /home/* 2> /dev/null
-        else
-          echo "Home Space Utilization ($USER)"
-          du -sh $HOME 2> /dev/null
-        fi
-        sleep $DELAY
-        continue
-        ;;
-      0)
-        break
-        ;;
-    esac
-  else
-    echo "Invalid entry."
-    sleep $DELAY
-  fi
+  exec 3>&1
+  selection=$(dialog \
+    --backtitle "System Information" \
+    --title "Menu" \
+    --clear \
+    --cancel-label "Exit" \
+    --menu "Please select:" $HEIGHT $WIDTH 4 \
+    "1" "Display System Information" \
+    "2" "Display Disk Space" \
+    "3" "Display Home Space Utilization" \
+    2>&1 1>&3)
+  exit_status=$?
+  exec 3>&-
+  case $exit_status in
+    $DIALOG_CANCEL)
+      clear
+      echo "Program terminated."
+      exit
+      ;;
+    $DIALOG_ESC)
+      clear
+      echo "Program aborted." >&2
+      exit 1
+      ;;
+  esac
+  case $selection in
+    0 )
+      clear
+      echo "Program terminated."
+      ;;
+    1 )
+      result=$(echo "Hostname: $HOSTNAME"; uptime)
+      display_result "System Information"
+      ;;
+    2 )
+      result=$(df -h)
+      display_result "Disk Space"
+      ;;
+    3 )
+      if [[ $(id -u) -eq 0 ]]; then
+        result=$(du -sh /home/* 2> /dev/null)
+        display_result "Home Space Utilization (All Users)"
+      else
+        result=$(du -sh $HOME 2> /dev/null)
+        display_result "Home Space Utilization ($USER)"
+      fi
+      ;;
+  esac
 done
-echo "Program terminated."
