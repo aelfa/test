@@ -13,7 +13,6 @@ services:
             - '/opt/docker/gaps:/usr/data'
         restart: unless-stopped
 
-
 services:
     overseerr:
         image: sctx/overseerr
