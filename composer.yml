@@ -5,8 +5,6 @@ services:
        container_name: gaps 
        ports:
             - '8484:8484'
-        expose:
-            - '32400'
         volumes:
             - '/opt/docker/gaps:/usr/data'
         restart: unless-stopped
