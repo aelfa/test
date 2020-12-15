@@ -1,9 +1,13 @@
 version: '3.3'
 services:
     gaps:
-       image: housewrecker/gaps:latest
-       container_name: gaps 
-       ports:
+        image: housewrecker/gaps:latest
+        container_name: gaps
+        network_mode: sudobox
+        environment:
+            - PGID=1000
+            - PUID=1000
+        ports:
             - '8484:8484'
         volumes:
             - '/opt/docker/gaps:/usr/data'
@@ -14,12 +18,35 @@ services:
     overseerr:
         image: sctx/overseerr
         container_name: overseerr
+        network_mode: sudobox
         environment:
+            - PGID=1000
+            - PUID=1000
             - LOG_LEVEL=info
             - TZ=Asia/Tokyo
         ports:
             - '5055:3000'
         volumes:
-            - '/opt/dockers/overseerr:/app/config'
+            - '/opt/dockers/overseerr:/app/config:rw'
         restart: unless-stopped
 
+services:
+    traktarr:
+        container_name: Traktarr
+        image: 'eafxx/traktarr:latest'
+        network_mode: sudobox
+        environment:
+            - TZ=Europe/London
+            - PUID=1000
+            - PGID=1000
+            - DELAY=2.5
+            - SORT=rating
+            - NOSEARCH=yes
+            - NOTIFICATIONS=no
+            - BLACKLIST=yes
+            - RUNNOW=yes
+            - SKIPUPDATE=no
+            - APP_BRANCH=master
+        volumes:
+            - '/opt/dockers/traktarr:/config:rw'
+        restart: unless-stopped
