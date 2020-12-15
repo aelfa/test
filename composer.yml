@@ -8,9 +8,9 @@ services:
             - PGID=1000
             - PUID=1000
         ports:
-            - '8484:8484'
+            - 8484:8484
         volumes:
-            - '/opt/docker/gaps:/usr/data'
+            - /opt/docker/gaps:/usr/data
         restart: unless-stopped
 
 services:
@@ -26,13 +26,13 @@ services:
         ports:
             - '5055:3000'
         volumes:
-            - '/opt/dockers/overseerr:/app/config:rw'
+            - /opt/dockers/overseerr:/app/config:rw
         restart: unless-stopped
 
 services:
     traktarr:
         container_name: Traktarr
-        image: 'eafxx/traktarr:latest'
+        image: eafxx/traktarr:latest
         network_mode: sudobox
         environment:
             - TZ=Europe/London
@@ -47,5 +47,5 @@ services:
             - SKIPUPDATE=no
             - APP_BRANCH=master
         volumes:
-            - '/opt/dockers/traktarr:/config:rw'
+            - /opt/dockers/traktarr:/config:rw
         restart: unless-stopped
