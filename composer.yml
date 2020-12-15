@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    gaps:
+       image: housewrecker/gaps:latest
+       container_name: gaps 
+       ports:
+            - '8484:8484'
+        expose:
+            - '32400'
+        volumes:
+            - '/opt/docker/gaps:/usr/data'
+        restart: unless-stopped
+
+
+services:
+    overseerr:
+        image: sctx/overseerr
+        container_name: overseerr
+        environment:
+            - LOG_LEVEL=info
+            - TZ=Asia/Tokyo
+        ports:
+            - '5055:3000'
+        volumes:
+            - '/opt/dockers/overseerr:/app/config'
+        restart: unless-stopped
+
