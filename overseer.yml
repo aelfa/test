@@ -1,7 +1,4 @@
-eated a yml but for some reason it creates a 502 error. I've waited a good while for it to come online but no cigar. If someone else has time to cast their eye over the below to get it working then that would be great which is now working nicely :)
-
-Code:
-#!/bin/bash
+#!/bin/ansible
 #
 # Title:      PGBlitz (overseer)
 # Author(s):  MrDoob / Timmeh
