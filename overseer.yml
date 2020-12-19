@@ -13,7 +13,7 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'overseerr'
-        intport: '3000'
+        intport: '5055'
         extport: '5055'
         image: 'sctx/overseerr'
 
@@ -27,7 +27,6 @@
         pg_labels:
           traefik.enable: 'true'
           traefik.port: '{{intport}}'
-          traefik.frontend.auth.forward.address: '{{gauth}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}}{{tldset}}{{cname}}'
           traefik.frontend.headers.SSLHost: '{{domain.stdout}}'
           traefik.frontend.headers.SSLRedirect: 'true'
@@ -44,7 +43,6 @@
       set_fact:
         pg_volumes:
           - '/opt/appdata/{{pgrole}}/config:/app/config:rw'
-          - '/mnt:/mnt:rw'
           - '/etc/localtime:/etc/localtime:ro'
 
     - name: 'Setting PG ENV'
