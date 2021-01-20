@@ -32,11 +32,11 @@ EOF
 }
 
 function updateall() {
-apt-get update -y
-apt-get upgrade -y
-apt-get dist-upgrade -y
-apt-get autoremove -y
-apt-get autoclean -y
+package_list="update upgrade dist-upgrade autoremove autoclean "
+for i in ${package_list}; do
+    sudo apt $i -yqq 1>/dev/null 2>&1
+    sleep 1
+done
 }
 
 function mergerfsupdate() {
