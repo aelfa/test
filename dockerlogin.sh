@@ -13,7 +13,7 @@ EOF
     exit 0
   fi
 }
-function updateall() {
+function updateall () {
 package_list="update upgrade dist-upgrade autoremove autoclean "
 for i in ${package_list}; do
     sudo apt $i -yqq 1>/dev/null 2>&1
