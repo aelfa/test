@@ -3,7 +3,7 @@
 # Copyright (c) 2020, MrDoob
 # All rights reserved.
 
-function sudocheck () {
+function sudocheck() {
   if [[ $EUID -ne 0 ]]; then
     tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -13,7 +13,7 @@ EOF
     exit 0
   fi
 }
-function updateall () {
+function updateall() {
 package_list="update upgrade dist-upgrade autoremove autoclean "
 for i in ${package_list}; do
     sudo apt $i -yqq 1>/dev/null 2>&1
@@ -23,7 +23,7 @@ done
 ## install pass
 sudo apt install pass -yqq 1>/dev/null 2>&1
 }
-function hublogin () {
+function hublogin() {
  clear
  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
  echo " ⌛ INFO ! "
