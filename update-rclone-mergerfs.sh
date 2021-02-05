@@ -20,7 +20,7 @@ dpkg -i /tmp/mergerfs.deb
 rm -rf /tmp/mergerfs.deb 
 }
 
-function sudocheck () {
+function sudocheck() {
   if [[ $EUID -ne 0 ]]; then
     tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
