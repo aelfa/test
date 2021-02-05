@@ -9,7 +9,7 @@ curl https://rclone.org/install.sh | sudo bash
 function rclone_update_beta() {
 curl https://rclone.org/install.sh | sudo bash -s beta
 }
-function sudocheck () {
+function sudocheck() {
   if [[ $EUID -ne 0 ]]; then
     tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
