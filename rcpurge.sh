@@ -13,7 +13,7 @@ EOF
   exit 0
 fi
 }
-function rctest() {
+function rctest () {
 if [[ $(command -v rclone) == "" ]]; then
     tee <<-EOF
 ━━━━━━━━━━━━━
@@ -23,7 +23,7 @@ EOF
   exit 0
 fi
 }
-function rcpurge() {
+function rcpurge () {
 IFS=$'\n'
 filter="$1"
 config=/opt/appdata/plexguide/rclone.conf
