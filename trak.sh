@@ -13,13 +13,15 @@ mapfile -t traktlist < <(eval cat ${list} )
 ##### RUN Traktarr #####
 for i in ${traktlist[@]}; do
    #docker exec "${PROG}" traktarr "${ART}" -t "${LIST}" 1>/dev/null 2>&1
+   array=$i
+   echo ${#array[@]}
    echo "$i"
-   PROG="$1"
-   ART="$2"
-   LIST="$3"
+   PROG=${array[1]}
+   ART=${array[2]}
+   LIST=${array[3]}
    echo "$i"
-   echo "$1"
-   echo "$2"
-   echo "$3"
+   echo "$PROG"
+   echo "$ART"
+   echo "$LIST"
 done
 exit
