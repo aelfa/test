@@ -8,14 +8,17 @@
 ### $3 > https lists or trakt.tv popular or box-office 
 
 IFS=$'\n'
+PROG="$1"
+ART="$2"
+LIST="$3"
 list=/home/trakt/trakt.list
-mapfile -t traktlist < <(eval cat ${list})
+mapfile -t traktlist < <(eval cat ${list} | grep "$PROG" | grep "$ART" | grep "$LIST" )
 ##### RUN Traktarr #####
 for i in ${traktlist[@]}; do
-   PROG=$1
-   ART=$2
-   LIST=$3
    #docker exec "${PROG}" traktarr "${ART}" -t "${LIST}" 1>/dev/null 2>&1
    echo "$i"
+   echo "$1"
+   echo "$2"
+   echo "$3"
 done
 exit
