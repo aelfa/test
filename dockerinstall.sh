@@ -1,6 +1,6 @@
 #!/bin/bash
-
-if ! docker --version; then
+docker=$(docker --version)
+if [[ "$docker" == "" ]]; then
     install_docker
 else 
     reinstall_docker 
