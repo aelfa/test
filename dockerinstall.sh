@@ -1,10 +1,13 @@
 #!/bin/bash
+
+function startcommand() {
 docker=$(docker --version)
 if [[ "$docker" == "" ]]; then
     install_docker
 else 
     reinstall_docker 
 fi
+}
 
 function reinstall_docker() {
 tee <<-EOF
@@ -40,3 +43,6 @@ sudo systemctl status docker | awk '$1 == "Active:" {print $2,$3}'
 sudo usermod -aG docker $(whoami)
 sudo id -nG
 }
+
+startcommand
+#<EOF>#
