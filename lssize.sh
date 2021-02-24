@@ -10,12 +10,16 @@ IFS=$'\n'
 filter=$1
 ## function source end
 
+if [[ -f "/home/mount.sizes" ]]; then
+   rm -f /home/mount.sizes
+fi
+
 config=/opt/appdata/mount/rclone.conf
-mapfile -t mount < <(eval rclone listremotes --config=${config} | grep "$filter" | sed '/GDSA/d' | sed '/pgunion/d')
+mapfile -t mounts < <(eval rclone listremotes --config=${config} | grep "$filter" | sed '/GDSA/d' | sed '/pgunion/d')
 ## function source end
 
 for i in ${mounts[@]}; do
-  echo; echo For $i | tee -a mount.sizes
+  echo; echo For $i | tee -a /home/mount.sizes
   rclone size $i --config=${config} --fast-list | tee -a /home/mount.sizes
 done
 rcc=/home/mount.sizes
