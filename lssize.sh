@@ -6,7 +6,7 @@
 
 ## function source start
 IFS=$'\n'
-> /hone/mount.sizes
+> /home/mount.sizes
 filter=$1
 ## function source end
 
