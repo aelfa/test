@@ -10,7 +10,7 @@ IFS=$'\n'
 filter=$1
 ## function source end
 
-config=/opt/appdata/mount/config/rclone.conf
+config=/opt/appdata/mount/config/rclone-docker.conf
 mapfile -t mount < <(eval rclone listremotes --config=${config} | grep "$filter" | sed '/GDSA/d' | sed '/pgunion/d')
 ## function source end
 
