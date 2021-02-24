@@ -6,7 +6,7 @@
 
 ## function source start
 IFS=$'\n'
-> mount.sizes
+> /hone/mount.sizes
 filter=$1
 ## function source end
 
@@ -19,11 +19,11 @@ mapfile -t mounts < <(eval rclone listremotes --config=${config} | grep "$filter
 ## function source end
 
 for i in ${mounts[@]}; do
-  echo; echo For $i | tee -a /home/mount.sizes
-  rclone size $i --config=${config} --fast-list | tee -a /home/mount.sizes
+  echo For $i Drive/Folder Scan is running
+  rclone size $i --config=${config} --fast-list >> /home/mount.sizes
 done
-rcc=/home/mount.sizes
-if [[ -f "$rcc" ]]; then
+CC2=/home/mount.sizes
+if [[ -f "$CC2" ]]; then
 endline=$(cat /home/mount.sizes)
 tee <<-EOF
 
