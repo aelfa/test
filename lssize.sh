@@ -20,6 +20,7 @@ mapfile -t mounts < <(eval rclone listremotes --config=${config} | grep "$filter
 
 for i in ${mounts[@]}; do
   echo For $i Drive/Folder Scan is running
+  echo For $i >> /home/mount.sizes
   rclone size $i --config=${config} --fast-list >> /home/mount.sizes
 done
 CC2=/home/mount.sizes
