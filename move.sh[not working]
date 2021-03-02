@@ -1,0 +1,43 @@
+# method.set_key = event.download.finished,move_complete,"execute=/config/scripts/move.sh,$d.custom1=,$d.name="
+
+# full path of torrent. 
+# $1 = label name = MOVIES
+# $2 = directory name = NAME.OF.TORRENT
+
+full_path="/mnt/incomplete/torrent/$1/$2"
+
+# folder to extract files to
+extract_folder="/mnt/incomplete/torrent/extracted"
+
+# move extracted files to this folder
+completed_folder="/mnt/downloads/torrent/$1/$2"
+
+torrent_name="$2"
+
+## side note $2/<ONE DEEPER | to match>
+## side note use rsync not mv >> link-destination
+## side note add check for rsync != installed
+## side note auto-extract unpack edit
+## side note if>event unpack done then move
+
+if [ -f "$full_path" ]; then
+
+	if [[ "$torrent_name" = *.rar || "$torrent_name" = *.zip ]]; then
+		mkdir "$extract_folder/temp"
+		unrar e -r -o- "$full_path" "$extract_folder/temp" &> /dev/null
+		unzip "$full_path" -d "$extract_folder/temp" &> /dev/null
+		unrar e -r -o- "$extract_folder/temp/*.rar" "$extract_folder/temp" &> /dev/null
+		unzip "$extract_folder/temp/*.zip" -d "$extract_folder/temp" &> /dev/null
+		find "$extract_folder/temp" -type f -not -name "*.zip" -not -name "*.r[a0-9][r0-9]" -not -name "*sample*" -not -name "*.nfo" -not -name "*.jpg" -not -name "*.png" -not -name "*.srt" -not -name "*.sfv" -exec mv {} "$completed_folder" \;
+		rm -rf "$extract_folder/temp"
+	else
+		ln -s "$full_path" "$completed_folder"
+	fi
+else
+	mkdir "$extract_folder/temp"
+	unrar e -r -o- "$full_path/*.rar" "$extract_folder/temp" &> /dev/null
+	unzip "$full_path/*.zip" -d "$extract_folder/temp" &> /dev/null
+	find "$extract_folder/temp" -type f -not -name "*.zip" -not -name "*.r*" -not -name "*.r[a0-9][r0-9]" -not -name "*sample*" -not -name "*.jpg" -not -name "*.png" -not -name "*.srt" -not -name "*.sfv" -exec mv {} "$completed_folder" \;
+	find "$full_path" -type f -not -name "*.zip" -not -name "*.r[a0-9][r0-9]" -not -name "*sample*" -not -name "*.nfo" -not -name "*.jpg" -not -name "*.png" -not -name "*.srt" -not -name "*.sfv" -exec ln -s {} "$completed_folder" \;
+	rm -rf "$extract_folder/temp"
+fi
