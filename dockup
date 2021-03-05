@@ -1,10 +1,15 @@
-docker run -d --name dockupdater \
-  -e CLEANUP=true \
-  -e RUN_ONCE=true \
-  -e LOG_LEVEL=info \
-  -e CRON="*/5 * * * *" \
-  -e WAIT=180 \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  dockupdater/dockupdater
-
-docker run --rm -d --name dockupdater -v /var/run/docker.sock:/var/run/docker.sock dockupdater/dockupdater --cron 0 5 * * 1
+version: '3.3'
+services:
+    dockupdater:
+        container_name: dockupdater
+        environment:
+            - CLEANUP=true
+            - RUN_ONCE=true
+            - LOG_LEVEL=info
+            - INTERVAL=300
+            - LABEL=true
+            - LATEST=true
+            - WAIT=180
+        volumes:
+            - '/var/run/docker.sock:/var/run/docker.sock'
+        image: dockupdater/dockupdater
