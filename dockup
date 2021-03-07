@@ -7,7 +7,6 @@ services:
             - LOG_LEVEL=info
             - INTERVAL=720
             - LABEL=true
-            - LATEST=true
             - WAIT=180
         volumes:
             - '/var/run/docker.sock:/var/run/docker.sock'
