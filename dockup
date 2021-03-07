@@ -5,7 +5,7 @@ services:
         environment:
             - CLEANUP=true
             - LOG_LEVEL=info
-            - INTERVAL=7200
+            - INTERVAL=720
             - LABEL=true
             - LATEST=true
             - WAIT=180
