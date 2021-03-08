@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+# Copyright (c) 2020, MrDoob
+# All rights reserved
 
 function startcommand() {
 docker=$(docker --version)
