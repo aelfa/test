@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+# Copyright (c) 2020, MrDoob
+# All rights reserved
 
 sudo docker ps -a -q --format '{{.Names}}' | sort | sed -e 's/portainer//g' | sed '/^$/d' >> /tmp/stopdockers
 containers=$(cat /tmp/stopdockers)
