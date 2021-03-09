@@ -26,7 +26,12 @@ fi
 function rcpurge() {
 IFS=$'\n'
 filter="$1"
-config=/opt/appdata/plexguide/rclone.conf
+mountd=$(docker ps -aq --format={{.Names}} | grep -E "mount" && echo true || echo false)
+if [[ $mountd == "false" ]]; then
+   config=/opt/appdata/plexguide/rclone.conf
+else
+   config=/opt/appdata/mount/rclone/rclone-docker.conf
+fi
 mapfile -t mounts < <(eval rclone listremotes --config=${config} | grep "$filter" | sed -e 's/://g' | sed '/pgunion/d' | sed '/GDSA/d' | sort -r)
 ##### RUN MOUNT #####
 for i in ${mounts[@]}; do
@@ -39,8 +44,6 @@ for i in ${mounts[@]}; do
   echo "rclone mkdir and touch done for $i"
 done
 }
-
-
 sudocheck
 rctest
 rcpurge
