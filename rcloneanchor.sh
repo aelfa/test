@@ -36,7 +36,7 @@ for i in ${mounts[@]}; do
   echo "rclone touch file  $i.anchor on $i"
   rclone touch $i:/.anchors/$i.anchors \
        --config=${config}
-  echo "rclone rmdirs done for $i"
+  echo "rclone mkdir and touch done for $i"
 done
 }
 
