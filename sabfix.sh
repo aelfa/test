@@ -19,4 +19,7 @@ done
 sabnzbd=$(docker ps -aq --format={{.Names}} | grep -qE 'sabnzbd' && echo true || echo false)
 if [[ $sabnzbd  == "true" ]]; then
     docker restart sabnzbd 1>/dev/null 2>&1
+    echo "sabnzbd  restarted" 
 fi
+
+echo "all done"
