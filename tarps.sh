@@ -1,13 +1,12 @@
 OPTIONSTAR="--warning=no-file-changed \
   --ignore-failed-read \
   --absolute-names \
-  --warning=no-file-removed \
-  --use-compress-program=pigz"
+  --warning=no-file-removed"
 
-ARCHIVROOT="/opt/appdata/radarr"
+ARCHIVEROOT="/opt/appdata/"
 ARCHIVE="radarr"
 PASSWORDTAR=${ARCHIVE}.tar.gz.enc
 PASSWORD="TEST"
 
 cd ${ARCHIVEROOT}
-tar ${OPTIONSTAR} -C ${ARCHIVE} -cf $PASSWORDTAR} ./ | openssl enc -aes-256-cbc -e -pass pass:${PASSWORD} > ${PASSWORDTAR}
+tar ${OPTIONSTAR} -cz ${ARCHIVE}/ | openssl enc -aes-256-cbc -e -pass pass:${PASSWORD} > ${ARCHIVEROOT}/${PASSWORDTAR}
