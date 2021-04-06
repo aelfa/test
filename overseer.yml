@@ -15,7 +15,7 @@
         pgrole: 'overseerr'
         intport: '5055'
         extport: '5055'
-        image: 'sctx/overseerr'
+        image: 'ghcr.io/sct/overseerr'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
