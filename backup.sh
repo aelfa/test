@@ -13,6 +13,7 @@ dockers=$(docker ps -aq --format '{{.Names}}' | sed '/^$/d' | grep -v 'trae' | g
 for i in ${dockers};do
     $(command -v docker) run --rm -v /var/run/docker.sock:/var/run/docker.sock red5d/docker-autocompose $docker > /opt/appdata/$i/docker-compose.yml
     $(command -v docker) run --rm -v /opt/appdata:/backup/$i -v /mnt:/mnt ghcr.io/doob187/docker-remote:latest backup $i
+    $(command -v rm) -rf /opt/appdata/$i/docker-compose.yml 1>/dev/null 2>&1
 done
 
 $(command -v docker) system prune -af 1>/dev/null 2>&1
