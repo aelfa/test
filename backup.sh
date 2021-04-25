@@ -21,7 +21,6 @@ $(command -v docker) pull ghcr.io/doob187/docker-remote:latest 1>/dev/null 2>&1
 dockers=$(docker ps -aq --format '{{.Names}}' | sed '/^$/d' | grep -v 'trae' | grep -v 'auth')
 for i in ${dockers};do
     $(command -v docker) run --rm -v /opt/appdata:/backup/$i -v /mnt:/mnt ghcr.io/doob187/docker-remote:latest backup $i local
-    $(command -v rm) -rf /opt/appdata/$i/docker-compose.yml 1>/dev/null 2>&1
 done
 
 $(command -v docker) system prune -af 1>/dev/null 2>&1
